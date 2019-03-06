@@ -1,0 +1,44 @@
+OOPS concepts
+Abstract class vs interface
+Marker interface
+Boxing and auto boxing 
+Overloading with Type promotion 
+Exception handling 
+Soap vs rest
+Jason to object and vise versa
+Web server vs application server
+Comparable vs comparator 
+Singleton lazy initialisation 
+Singleton with multithreading (synchronised)
+Singleton with Bill Pugh
+Singleton with serializable 
+Factory pattern
+Try catch and finally
+Try catch finally against return statement 
+Try catch with instanceof
+Hashcode vs equals
+If hashcode returns 1 constantly 
+Clonable
+Concurrent modification exception 
+Git workflow 
+Hashmap iteration
+Other iterator
+Forward vs redirect 
+Get, post, put, delete
+Request entity vs response body
+Controller vs restcontroller 
+Jwt token 
+Exception handling with controller advice and response entity 
+IOC
+Spring singleton scope
+Spring autowire options 
+Test cases
+Spring Boot Architecture 
+@component 
+@service
+Collections 
+Multithreading 
+Access modifiers
+Sorting
+Spring boot architecture in our environment
+Shallow copy vs deep copy
