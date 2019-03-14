@@ -1,0 +1,44 @@
+Q1)What is a IO stream?
+It is a stream of data that flows from source to destination. Good example is file copying. Two streams are involved – input stream and output stream. An input stream reads from the file and stores the data in the process (generally in a temporary variable). The output stream reads from the process and writes to the destination file.
+
+Q2) What is the necessity of two types of streams – byte streams and character streams?
+Byte streams were introduced with JDK 1.0 and operate on the files containing ASCII characters. We know Java supports other language characters also known as Unicode characters. To read the files containing Unicode characters, the designers introduced character streams with JDK 1.1. As ASCII is a subset of Unicode, for the files of English characters, we can go with either byte streams or character streams.
+
+Q3) What are the super most classes of all streams?
+All the byte stream classes can be divided into two categories (input stream classes and output stream classes) and all character streams classes into two (reader classes and writer classes). There are four abstract classes from which all these streams are derived. The super most class of all byte stream classes is java.io.InputStream and for all output stream classes, java.io.OutputStream. Similarly for all reader classes is java.io.Reader and for all writer classes is java.io.Writer.
+
+Q4) What are FileInputStream and FileOutputStream?
+These two are general purpose classes used by the programmer very often to copy file to file. These classes work well with files containing less data of a few thousand bytes as by performance these are very poor. For larger data, it is preferred to use BufferedInputStream (or BufferedReader) and BufferedOutputStream (or BufferedWriter).
+
+Q5) Which you feel better to use – byte streams or character streams?
+I feel personally to go with character streams as they are the latest. Many features exist in character streams that do not in byte streams like a) using BufferedReader in place of BufferedInputStreams and DataInputStream (one stream for two) and b) using newLine() method to go for next line and for this effect we must go for extra coding in byte streams etc.
+
+Q6) What System.out.println()?
+"println()" is a method of PrintStream class. "out" is a static object of PrintStream class defined in "System" class. System is a class from java.lang package used to interact with the underlying operating system by the programmer.
+
+Q7) What are filter streams?
+Filter streams are a category of IO streams whose responsibility is to add extra functionality (advantage) to the existing streams like giving line numbers in the destination file that do not exist int the source file or increasing performance of copying etc.
+
+Q7) Name the filter streams available?
+There are four filter streams in java.io package – two in byte streams side and two in character streams side. They are FilterInputStream, FilterOutputStream, FilterReader and FilterWriter. These classes are abstract classes and you cannot create of objects of these classes.
+
+Q8) Name the filter stream classes on reading side of byte stream?
+There are four classes – LineNumberInputStream (the extra functionality is it adds line numbers in the destination file), DataInputStream (contains special methods like readInt(), readDouble() and readLine() etc that can read an int, a double and a string at a time), BufferedInputStream (gives buffering effect that increases the performance to the peak) and PushbackInputStream (pushes the required character back to the system).
+
+Q9) What is the functionality of SequenceInputStream?
+It is very useful to copy multiple source files into one destination file with very less code.
+
+Q10) What is PrintStream and PrintWriter?
+Functionally both are same but belong to two different categories – byte streams and character streams. println() method exists in both classes.
+
+Q11) Which streams are advised to use to have maximum performance in file copying? 
+BufferedInputStream and BufferedOutputStream on byte streams side and BufferedReader and BufferedWriter on character streams side.
+
+Q12) What are piped streams?
+There are four piped streams – PipedInputStream, PipedOutputStream, PipedReader and PipedWriter. These streams are very useful to pass data between two running threads (say, processes).
+
+Q13) What is File class?
+It is a non-stream (not used for file operations) class used to know the properties of a file like when it was created (or modified), has read and write permissions, size etc.
+
+Q14) What is RandomAccessFile?
+It is a special class from java.io package which is neither a input stream nor a output stream (because it can do both). It is directly a subclass of Object class. Generally, a stream does only one purpose of either reading or writing; but RandomAccessFile can do both reading from a file and writing to a file. All the methods of DataInputStream and DataOutStream exist in RandomAccessFile.
