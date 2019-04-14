@@ -6,11 +6,11 @@ public class ThreadDeadLockDemo {
 		Object train = new Object();
 		Object compartment = new Object();
 
-		BookTrainTicket bookTrainTicket = new BookTrainTicket(train, compartment);
-		CancelTrainTicket cancelTrainTicket = new CancelTrainTicket(train, compartment);
+		BookTrainTicketDeadLock BookTrainTicketDeadLock = new BookTrainTicketDeadLock(train, compartment);
+		CancelTrainTicketDeadLock CancelTrainTicketDeadLock = new CancelTrainTicketDeadLock(train, compartment);
 
-		Thread th1 = new Thread(bookTrainTicket);
-		Thread th2 = new Thread(cancelTrainTicket);
+		Thread th1 = new Thread(BookTrainTicketDeadLock);
+		Thread th2 = new Thread(CancelTrainTicketDeadLock);
 
 		th1.start();
 		th2.start();
@@ -18,10 +18,10 @@ public class ThreadDeadLockDemo {
 
 }
 
-class BookTrainTicket implements Runnable {
+class BookTrainTicketDeadLock implements Runnable {
 	Object train, compartment;
 
-	BookTrainTicket(Object train, Object compartment) {
+	BookTrainTicketDeadLock(Object train, Object compartment) {
 		this.train = train;
 		this.compartment = compartment;
 	}
@@ -30,17 +30,17 @@ class BookTrainTicket implements Runnable {
 	public void run() {
 
 		synchronized (train) {
-			System.out.println("BookTrainTicket locked on train");
+			System.out.println("BookTrainTicketDeadLock locked on train");
 
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 			}
 
-			System.out.println("BookTrainTicket now waiting to lock on compartment");
+			System.out.println("BookTrainTicketDeadLock now waiting to lock on compartment");
 
 			synchronized (compartment) {
-				System.out.println("BookTrainTicket locked on compartment");
+				System.out.println("BookTrainTicketDeadLock locked on compartment");
 			}
 		}
 
@@ -48,10 +48,10 @@ class BookTrainTicket implements Runnable {
 
 }
 
-class CancelTrainTicket implements Runnable {
+class CancelTrainTicketDeadLock implements Runnable {
 	Object train, compartment;
 
-	CancelTrainTicket(Object train, Object compartment) {
+	CancelTrainTicketDeadLock(Object train, Object compartment) {
 		this.train = train;
 		this.compartment = compartment;
 	}
@@ -60,8 +60,8 @@ class CancelTrainTicket implements Runnable {
 	public void run() {
 
 			
-			synchronized (train) {
-				System.out.println("CancelTrainTicket locked on train");
+		synchronized (compartment) {
+			System.out.println("CancelTrainTicketDeadLock locked on compartment");
 			
 
 			try {
@@ -69,10 +69,10 @@ class CancelTrainTicket implements Runnable {
 			} catch (InterruptedException e) {
 			}
 
-			System.out.println("CancelTrainTicket now waiting to lock on compartment");
+			System.out.println("CancelTrainTicketDeadLock now waiting to lock on train");
 
-			synchronized (compartment) {
-				System.out.println("CancelTrainTicket locked on compartment");
+			synchronized (train) {
+				System.out.println("CancelTrainTicketDeadLock locked on train");
 			
 			}
 
