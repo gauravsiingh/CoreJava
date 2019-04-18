@@ -1,4 +1,4 @@
-package com.gaurav.javafromnotes.collections.basic;
+package com.gaurav.javafromnotes.collections;
 
 import java.util.ArrayList;
 import java.util.Collections;

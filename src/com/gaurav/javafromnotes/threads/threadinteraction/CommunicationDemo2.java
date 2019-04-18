@@ -2,7 +2,6 @@ package com.gaurav.javafromnotes.threads.threadinteraction;
 
 class Producer2 implements Runnable {
 	StringBuffer sb;
-	boolean dpo;
 
 	Producer2() {
 		sb = new StringBuffer();
@@ -53,11 +52,11 @@ public class CommunicationDemo2 {
 		Producer2 producer2 = new Producer2();
 		Consumer2 consumer2 = new Consumer2(producer2);
 
-		Thread thread1 = new Thread(producer2);
-		Thread thread2 = new Thread(consumer2);
+		Thread thread21 = new Thread(producer2);
+		Thread thread22 = new Thread(consumer2);
 
-		thread1.start();
-		thread2.start();
+		thread21.start();
+		thread22.start();
 
 	}
 

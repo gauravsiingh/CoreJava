@@ -35,12 +35,13 @@ class Consumer1 implements Runnable {
 
 	@Override
 	public void run() {
+		System.out.println(producer1.dpo);
 		while (!producer1.dpo) {
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
 			}
-
+			
 			System.out.println("producer1.sb = " + producer1.sb);
 		}
 	}
