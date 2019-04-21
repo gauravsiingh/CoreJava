@@ -13,7 +13,7 @@ public class MyClass {
 
 	@Override
 	public int hashCode() {
-		return x * 31 *17;
+		return x * 31 * 17;
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class MyClass {
 			return false;
 		MyClass myClass = (MyClass) obj;
 
-		return (x == myClass.getX());
+		return (this.x == myClass.getX());
 	}
 
 }
