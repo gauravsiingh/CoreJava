@@ -101,8 +101,8 @@ public class SingletonSerializationTest {
 		else
 			System.out.println("Both singleton instances are different");
 		
-		System.out.println(SingletonSerialization1.randomNum);
-		System.out.println(SingletonSerialization2.randomNum);
+		System.out.println(SingletonSerialization1.hashCode());
+		System.out.println(SingletonSerialization2.hashCode());
 		
 	}
 

@@ -1,4 +1,4 @@
-package com.gaurav.programs.interview;
+package com.gaurav.programs.basic;
 
 public class ReverseANumber {
 

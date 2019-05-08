@@ -14,6 +14,10 @@ public class HashSetDemo {
 		hs.add("Oracle");
 		hs.add("PHP");
 		hs.add("AJAX");
+		hs.add("C");
+		hs.add("PHP");
+		hs.add(null);
+		hs.add(null);
 		
 		System.out.print("HashSet items : " + hs); //unpredictable, does not maintain any order
 
