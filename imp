@@ -1,0 +1,108 @@
+
+Provider defines the contracts for all the endpoints for all the possible test scenarios
+Provider creates the base test class for the generated verifier test to extend from
+Provider creates the JUnit tests for all the test scenarios as part of the base test class
+Provider publishes the contract stubs to artifact repository
+Consumer includes the contract stubs as a dependency
+Consumer creates JUnit for the classes which invokes the REST API through the stub runner
+
+RB API
+
+
+[
+JPA Implementation Configuration
+[
+@Configuration
+@EnableJpaRepositories
+@EnableTransactionManagement
+class PERJPACONFIG{
+
+@Profile(!cloud)
+class ForLocal{
+	@Bean
+	DataSource dataSource(){
+	set dataSource url, driver class name, username, password
+	return basicDataSource object
+	}
+}
+
+@Configuration
+@Profile(cloud)
+class ForCloud{
+	@Bean
+	DataSource dataSource(){
+	PooledServiceConnectorConfig.poolconfig poolconfig = new PooledServiceConnectorConfig.poolconfig(minPoolSize, maxPoolSize, maxWaitTime);
+	DataSourceConfig dsConfig = new DataSource(poolconfig, null);
+	DataSource dataSourceCloud  = connectionFactory(dsConfig);
+	return dataSourceCloud;
+	}
+}
+
+@Autowired
+@Qualifier("dataSource")
+DataSource dataSource;
+
+@Bean
+public JdbcTemplate jdbcTemplate(){
+	return new JdbcTemplate(dataSource);
+}
+
+@Bean
+@Primary
+public class LocalContainerEntityManagerFactoryBean rbenmanfac(){
+	LocalContainerEntityManagerFactoryBean lcemfb = new LocalContainerEntityManagerFactoryBean();
+	lcemfb.setDataSource(datasource);
+	lcemfb.setPackagesToScan(packages to scan this will be the base package)
+	
+	HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+	vendorAdapter.setGenerateDdl(true);
+	HashMap properties = new HashMap();
+	
+	properties.put("hibernate.hbm2ddl.auto", "none");
+	properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+	
+	lcemfb.setjpaVendoreAdapter(vendorAdapter);
+	lcemfb.setPropertyMap(properties);
+	
+	retutn lcemfb;
+}
+
+@Bean
+@Primary
+public class PlatformTransactionManager rbtransman(){
+	JpaTransactionManager transactionManager = new JpaTransactionManager();
+	transactionManager.setEntityManagerFactory(rbenmanfac.getObject());
+	return transactionManager;
+	}
+}
+]
+
+
+RB Transaction Manager and Repo
+[
+ 1. Write a class RBTranRepository which extends JpaRepository<>.
+ 2. You can write a custom SQL query by using the @Query annotation.
+ 3. The @Transactional annotationcan be put on a class or a method from where the call is made to the query in JpaRepository implementation.
+
+ 
+ For Swagger
+ 1. Anotate the functional interface with @Api, this will register the interface as a swagger resource.
+ 2. Define the @ApiOperations, @ApiResponses, @ApiImplicitParams as required over the abstract method.
+]
+
+RB Service class implementation
+[
+1. Create a interface (functional interface) with the abstract method.
+2. Create a class that implements the functional interface
+3. Annotate the implementation class with @RestController annotation, create a method in it and annotate it with @RequestMapping annotaion.
+4. The method written can have @ApiParam(swagger), @PathVariable, @RequestParam.
+]
+
+]
+
+How to handle exception
+
+1. Create a class that extends Exception class or any of its subclasses.
+2. Implement the various exception class constructors for customized exception class (depends on requirement).
+3. Write a Exception Handler class anontating it with the @RestControllerAdvice annotation.
+4. Write a method to peroform required operations when the exception of the type occurs. Annotate the method with @ExceptionHandler annotation. 
