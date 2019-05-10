@@ -106,3 +106,25 @@ How to handle exception
 2. Implement the various exception class constructors for customized exception class (depends on requirement).
 3. Write a Exception Handler class anontating it with the @RestControllerAdvice annotation.
 4. Write a method to peroform required operations when the exception of the type occurs. Annotate the method with @ExceptionHandler annotation. 
+
+
+
+
+
+
+
+
+SOAP and REST (Difference)
+https://raygun.com/blog/soap-vs-rest-vs-json/
+https://restfulapi.net/soap-vs-rest-apis/
+
+GET, POST, PUT, DELETE, PATCH
+https://restfulapi.net/http-methods/
+
+JSON vs XML
+https://restfulapi.net/json-vs-xml/
+
+forward vs redirect
+https://www.dineshonjava.com/jsp-forward-vs-redirect/
+
+request entity vs response body
