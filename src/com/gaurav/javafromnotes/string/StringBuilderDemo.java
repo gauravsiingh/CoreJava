@@ -8,5 +8,7 @@ public class StringBuilderDemo {
 		
 		String string = new String("gaurav singh");
 		System.out.println(string.equals(builder));
+		
+		StringBuffer sbf = new StringBuffer();
 	}
 }
