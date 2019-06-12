@@ -107,3 +107,20 @@ Category theory Lectures for programmers (very interesting) - Bartosz Milewski
 https://www.youtube.com/watch?v=I8LbkfSSR58&list=PLbgaMIhjbmEnaH_LTkxLI7FMa2HsnawM_
 
 PS: Please share to the needy  , you can connect with me on twitter @rohinpp,  linkedin (Rohin Patel), github with user rohinp, email rohin.patel@outlook.com and mobile 9049362452. 
+
+jwtApiCommon - contains common functions for utility methods
+jwtApiClient - used by consumers to get xxx Gateway issued JWT token
+jwtApiAuthFilter - contains 2 J2EE filters used by providers. 1st filter GatewayJwtAuthentication filter authenticates the JWT token presented by the consumer and 2nd ApplicationScopeValidation filter performs authorization over API uri and HTTP verb.
+
+Flow of events
+1. Consumer generates HS256 token and validates it with the gateway.
+2. After successfull validation of the HS256 token from the consumer the gateway issues a RS256 token back signing it with its private key.
+3. The consumer can use the token to hit the secure service using HTTPS.
+4. If the services are secure the by the 2 filters then the consumers RS256 token will be authenticated by the GatewayJwtAuthenticationFilter and its claims will be used by the ApplicationScopeValidationFilter to authorize it at coarsed grained.
+
+A JWT token consists of the following 3 parts
+1) header - A header is of the following form {typ: "JWT", alg: "HS256"} denoting the type of the header (default is JWT), and the algorithm used. The JSON header is encoded using base64 and is represented as Base64UrlSafeEncoder(header)
+2) claims - claims is JSON object of the following form (iss:"issuer of the token generally the client or the gateway",sub:"generally the client api key used to identify the client",exp:"expiry time is seconds")
+3) signature - signature is the result of signing Base64UrlSafeEncoded(header).Base64UrlSafeEncoded(claims) with HS256 or RS256.
+
+The JWT token is presented in its serialization form which is constructed using all the 3 fields (header claims and signature separated by .(dots))
